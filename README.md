@@ -2,6 +2,13 @@
 
 This plugin provides esbuild plugin that enables bundle Scala.js code in your project.
 
+### TODO
+
+- make project name, etc. configurable
+- publish this plugin into npm
+- self bootstrap
+- scala steward
+
 ### Usage
 
 - install this plugin
