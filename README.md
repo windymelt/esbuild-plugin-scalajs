@@ -1,3 +1,5 @@
+![](./logo.png)
+
 ## esbuild plugin for Scala.js (currently just PoC)
 
 This plugin provides esbuild plugin that enables bundle Scala.js code in your project.
