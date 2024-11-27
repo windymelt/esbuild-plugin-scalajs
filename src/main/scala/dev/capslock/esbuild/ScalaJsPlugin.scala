@@ -8,12 +8,6 @@ import scala.concurrent.ExecutionContext.Implicits.global
 import js.JSConverters._
 // (implicitly) Promise to Future
 import scala.scalajs.js.Thenable.Implicits._
-import scala.util.matching.Regex
-import scala.concurrent.Await
-import scala.concurrent.duration._
-import scala.util.Try
-import scala.util.Success
-import scala.util.Failure
 
 @JSGlobal
 @js.native
@@ -25,13 +19,21 @@ object process extends js.Object {
 }
 
 @JSExportTopLevel("scalaJsPlugin", "esbuildScalaJsPlugin")
-object ScalaJsPlugin extends EsbuildPlugin {
-  val name                             = "scala-js"
-  private val isProd                   = process.env.NODE_ENV == "production"
-  private val scalaVersion             = "3.5.2"            // TODO: configurable
-  private val scalaProjectName         = "esbuild-exercise" // TODO: configurable
-  private val scalaTargetDirSuffix     = if isProd then "-opt" else "-fastopt"
-  private val scalaTargetFileExtension = "js"               // TODO: configurable
+def scalaJsPluginOptions(opts: ScalaJsPluginOptions): EsbuildPlugin = {
+  val impl = ScalaJsPluginImpl(opts)
+  new {
+    val name                      = "scala-js"
+    def setup(build: Build): Unit = impl.setup(build)
+  }
+}
+
+class ScalaJsPluginImpl(opts: ScalaJsPluginOptions) {
+  val name                     = "scala-js"
+  val isProd                   = process.env.NODE_ENV == "production"
+  val scalaVersion             = opts.scalaVersion
+  val scalaProjectName         = opts.scalaProjectName
+  val scalaTargetDirSuffix     = if isProd then "-opt" else "-fastopt"
+  val scalaTargetFileExtension = opts.scalaTargetFileExtension
 
   def setup(build: Build): Unit = {
 
@@ -44,7 +46,7 @@ object ScalaJsPlugin extends EsbuildPlugin {
     )
   }
 
-  private def runBuild(): Future[Unit] = {
+  def runBuild(): Future[Unit] = {
     // assuming sbtn
     val subcommand = if isProd then "fullLinkJS" else "fastLinkJS"
     runCommand("sbtn", Seq(subcommand))
