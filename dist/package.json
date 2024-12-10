@@ -1,6 +1,6 @@
 {
   "name": "esbuild-scalajs",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "esbuild plugin for Scala.js",
   "type": "module",
   "module": "./esbuildScalaJsPlugin.mjs",
