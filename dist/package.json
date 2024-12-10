@@ -1,8 +1,16 @@
 {
   "name": "esbuild-scalajs",
-  "version": "0.0.1",
+  "version": "0.0.4",
   "description": "esbuild plugin for Scala.js",
-  "main": "esbuild-plugin-scalajs-opt.js",
+  "type": "module",
+  "module": "./esbuildScalaJsPlugin.mjs",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "module": "./esbuildScalaJsPlugin.mjs",
+      "import": "./esbuildScalaJsPlugin.mjs"
+    }
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

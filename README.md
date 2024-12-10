@@ -1,6 +1,6 @@
 ![](./logo.png)
 
-## esbuild plugin for Scala.js (currently just PoC)
+## esbuild plugin for Scala.js (currently just PoC) ![NPM Version](https://img.shields.io/npm/v/esbuild-scalajs)
 
 This plugin provides esbuild plugin that enables bundle Scala.js code in your project.
 
