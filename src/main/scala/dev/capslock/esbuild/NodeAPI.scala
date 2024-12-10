@@ -39,3 +39,7 @@ trait SpawnOptions extends js.Object {
 trait ChildProcess extends js.Object {
   def on(ev: String, callback: js.Function1[Any, Unit]): Unit = js.native
 }
+
+@js.native
+@JSImport("node:process", "cwd")
+def cwd(): String = js.native

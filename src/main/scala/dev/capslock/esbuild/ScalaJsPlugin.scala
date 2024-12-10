@@ -71,13 +71,13 @@ object ScalaJsPlugin extends EsbuildPlugin {
       s"target/scala-$sv/$scalaProjectName$scalaTargetDirSuffix/"
     val targetPath =
       s"$scalaTargetDir$importModuleName.$scalaTargetFileExtension"
-    val absoluteTargerPath = s"${args.resolveDir}/$targetPath"
+    val absoluteTargetPath = s"${cwd()}/$targetPath"
 
     // TODO: if and only if first time, run sbtn
     runBuild(isProd).map { _ =>
       // XXX: assuming not failed
       new OnResolveResult {
-        val path = absoluteTargerPath
+        val path = absoluteTargetPath
       }
     }
   }
