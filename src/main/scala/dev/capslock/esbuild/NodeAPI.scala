@@ -9,8 +9,20 @@ import scala.concurrent.Future
 def runCommand(command: String, args: Seq[String]): Future[Unit] = {
   val p  = Promise[Unit]()
   val cp = spawn(command, args.toJSArray, new SpawnOptions { val stdio = "inherit" })
-  cp.on("exit", _ => p.success(())) // TODO: read exit code
-  cp.on("error", _ => p.failure(new Exception("subprocess reported error")))
+  cp.on(
+    "exit",
+    _ => {
+      scribe.info("process exited")
+      p.success(())
+    },
+  ) // TODO: read exit code
+  cp.on(
+    "error",
+    _ => {
+      scribe.error("subprocess reported error")
+      p.failure(new Exception("subprocess reported error"))
+    },
+  )
 
   p.future
 }
@@ -25,5 +37,5 @@ trait SpawnOptions extends js.Object {
 
 @js.native
 trait ChildProcess extends js.Object {
-  def on(ev: String, callback: js.Function1[String, Unit]): Unit = js.native
+  def on(ev: String, callback: js.Function1[Any, Unit]): Unit = js.native
 }
