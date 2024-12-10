@@ -1,0 +1,23 @@
+{
+  "name": "esbuild-scalajs",
+  "version": "0.0.1",
+  "description": "esbuild plugin for Scala.js",
+  "main": "esbuild-plugin-scalajs-opt.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/windymelt/esbuild-plugin-scalajs.git"
+  },
+  "keywords": [
+    "esbuild",
+    "scala"
+  ],
+  "author": "windymelt",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/windymelt/esbuild-plugin-scalajs/issues"
+  },
+  "homepage": "https://github.com/windymelt/esbuild-plugin-scalajs#readme"
+}
