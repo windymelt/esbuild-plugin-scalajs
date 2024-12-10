@@ -11,3 +11,8 @@ lazy val root = project
     libraryDependencies += "com.outr" %%% "scribe" % "3.15.2",
     libraryDependencies += "org.scalameta" %%% "munit" % "1.0.0" % Test,
   )
+  .enablePlugins(BuildInfoPlugin)
+  .settings(
+    buildInfoKeys := Seq[BuildInfoKey](name, version, scalaVersion, sbtVersion),
+    buildInfoPackage := "dev.capslock.esbuild"
+  )

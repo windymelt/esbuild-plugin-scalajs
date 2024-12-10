@@ -20,7 +20,7 @@ object process extends js.Object {
 
 @JSExportTopLevel("scalaJsPlugin", "esbuildScalaJsPlugin")
 def scalaJsPlugin(options: ScalaJsPluginOptions): EsbuildPlugin = {
-  scribe.info("scalaJsPlugin is starting up...")
+  scribe.info(s"scalaJsPlugin ${BuildInfo.version} (Scala ${BuildInfo.scalaVersion}) is starting up...")
   opts = options
   return ScalaJsPlugin
 }
